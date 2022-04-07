@@ -19,9 +19,47 @@ class QuoteList extends StatefulWidget {
 class _QuoteListState extends State<QuoteList> {
   List<Quote> quotes = [
     Quote(text: "Be yourself; everyone else is already taken.", by :"Oscar Wilde"),
-    Quote(text: "wo things are infinite: the universe and human stupidity; and I\'m not sure about the universe.", by :"Albert Einstein"),
+    Quote(text: "Two things are infinite: the universe and human stupidity; and I\'m not sure about the universe.", by :"Albert Einstein"),
     Quote(text: "So many books, so little time", by :"Frank Zappa")
   ];
+  
+  Widget quoteTemplate (quote){
+    return Card(
+        margin : EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(quote.text,
+              style:  TextStyle(
+                  fontFamily: 'Lato',
+                  fontSize: 20.0,
+                  color: Colors.grey[200],
+              ),),
+            const SizedBox(
+              height: 10.0,
+            ),
+            Text(quote.by,
+              style:  TextStyle(
+                  fontFamily: 'Lato',
+                  fontSize: 20.0,
+                  color: Colors.grey[200],
+                letterSpacing: 2.0,
+                fontWeight: FontWeight.bold
+              ),)
+          ],
+        ),
+      ),
+      color: Colors.grey[700],
+      elevation: 5.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -39,15 +77,8 @@ class _QuoteListState extends State<QuoteList> {
         backgroundColor: Colors.grey[800],
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: quotes.map((e) => Text(
-            '${e.text} - ${e.by}',
-          style:  TextStyle(
-            fontFamily: 'Lato',
-            fontSize: 20.0,
-            color: Colors.grey[200]
-          ),
-        )).toList(),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: quotes.map((e) => quoteTemplate(e)).toList(),
       ),
     );
   }
