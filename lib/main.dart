@@ -44,7 +44,7 @@ class _QuoteListState extends State<QuoteList> {
               style:  TextStyle(
                   fontFamily: 'Lato',
                   fontSize: 20.0,
-                  color: Colors.grey[200],
+                  color: Colors.amberAccent[100],
                 letterSpacing: 2.0,
                 fontWeight: FontWeight.bold
               ),)
