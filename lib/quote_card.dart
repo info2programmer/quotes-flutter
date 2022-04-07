@@ -4,7 +4,8 @@ import 'quote.dart';
 class QuoteCard extends StatelessWidget {
 
   final Quote quote;
-  QuoteCard({required this.quote});
+  final Function delete;
+  QuoteCard({required this.quote, required this.delete});
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +14,53 @@ class QuoteCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(quote.text,
-              style:  TextStyle(
-                fontFamily: 'Lato',
-                fontSize: 20.0,
-                color: Colors.grey[200],
-              ),),
-            const SizedBox(
-              height: 10.0,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 8,
+                  child:  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(quote.text,
+                        style:  TextStyle(
+                          fontFamily: 'Lato',
+                          fontSize: 20.0,
+                          color: Colors.grey[200],
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 10,
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(quote.by,
+                        style:  TextStyle(
+                            fontFamily: 'Lato',
+                            fontSize: 20.0,
+                            color: Colors.amberAccent[100],
+                            letterSpacing: 2.0,
+                            fontWeight: FontWeight.bold
+                        ),),
+                    ],
+                  ),
+                ),
+                Expanded(
+                    flex: 1,
+                    child: IconButton(
+                    onPressed: () => delete(quote),
+                    icon: const Icon(Icons.delete_outline),
+                    color: Colors.red,
+                  )
+                )
+              ],
             ),
-            Text(quote.by,
-              style:  TextStyle(
-                  fontFamily: 'Lato',
-                  fontSize: 20.0,
-                  color: Colors.amberAccent[100],
-                  letterSpacing: 2.0,
-                  fontWeight: FontWeight.bold
-              ),)
+
+
           ],
         ),
       ),

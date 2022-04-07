@@ -19,7 +19,7 @@ class _QuoteListState extends State<QuoteList> {
   List<Quote> quotes = [
     Quote(text: "Be yourself; everyone else is already taken.", by :"Oscar Wilde"),
     Quote(text: "Two things are infinite: the universe and human stupidity; and I\'m not sure about the universe.", by :"Albert Einstein"),
-    Quote(text: "So many books, so little time", by :"Frank Zappa")
+    Quote(text: "So many books, so little time", by :"Frank Zappa"),
   ];
   
   @override
@@ -40,7 +40,14 @@ class _QuoteListState extends State<QuoteList> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: quotes.map((e) => QuoteCard(quote : e)).toList(),
+        children: quotes.map((quote) => QuoteCard(
+            quote : quote,
+            delete: (quote) {
+              setState(() {
+                quotes.remove(quote);
+              });
+            }
+        )).toList(),
       ),
     );
   }
